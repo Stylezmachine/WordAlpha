@@ -1,9 +1,20 @@
 import React from 'react';
 import {View, StyleSheet, ScrollView} from 'react-native';
-import {Text, Card, Button, Avatar, useTheme} from 'react-native-paper';
+import {
+  Text,
+  Card,
+  Button,
+  Avatar,
+  useTheme,
+  IconButton,
+} from 'react-native-paper';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
-const HomeScreen: React.FC = () => {
+interface HomeScreenProps {
+  navigation?: any;
+}
+
+const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   const theme = useTheme();
 
   const todayWord = {
@@ -108,20 +119,57 @@ const HomeScreen: React.FC = () => {
           </Card.Actions>
         </Card>
 
+        {/* Multiplayer Section */}
+        <Card style={styles.multiplayerCard}>
+          <Card.Title
+            title="Play with Friends"
+            subtitle="Challenge friends in multiplayer word games"
+            left={props => <Avatar.Icon {...props} icon="account-group" />}
+            right={props => (
+              <IconButton
+                {...props}
+                icon="arrow-right"
+                onPress={() => navigation?.navigate('MultiplayerLobby')}
+              />
+            )}
+          />
+          <Card.Content>
+            <View style={styles.multiplayerActions}>
+              <Button
+                mode="contained"
+                icon="gamepad-variant"
+                style={[
+                  styles.actionButton,
+                  {backgroundColor: theme.colors.secondary},
+                ]}
+                onPress={() => navigation?.navigate('MultiplayerLobby')}>
+                Join Game
+              </Button>
+              <Button
+                mode="outlined"
+                icon="plus"
+                style={styles.actionButton}
+                onPress={() => navigation?.navigate('Friends')}>
+                Add Friends
+              </Button>
+            </View>
+          </Card.Content>
+        </Card>
+
         {/* Quick Actions */}
         <View style={styles.actionsContainer}>
           <Button
             mode="contained"
             icon="book-open"
             style={styles.actionButton}
-            onPress={() => console.log('Dictionary')}>
+            onPress={() => navigation?.navigate('Dictionary')}>
             Dictionary
           </Button>
           <Button
             mode="contained"
             icon="puzzle"
             style={styles.actionButton}
-            onPress={() => console.log('Games')}>
+            onPress={() => navigation?.navigate('Games')}>
             Word Games
           </Button>
         </View>
@@ -177,6 +225,14 @@ const styles = StyleSheet.create({
   example: {
     fontStyle: 'italic',
     opacity: 0.8,
+  },
+  multiplayerCard: {
+    marginVertical: 8,
+  },
+  multiplayerActions: {
+    flexDirection: 'row',
+    gap: 12,
+    marginTop: 8,
   },
   actionsContainer: {
     flexDirection: 'row',
