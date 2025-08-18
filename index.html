@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>For You 💌</title>
+<style>
+  :root {
+    --pink: #ff4d6d;
+    --purple: #8e44ad;
+    --bg: linear-gradient(135deg, #ffe5ec, #f8e8ff);
+    --card: #fff;
+    --shadow: 0 8px 20px rgba(0,0,0,.12);
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: var(--bg);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    padding: 40px 16px;
+    color: #333;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  /* Floating hearts */
+  .heart {
+    position: absolute;
+    color: rgba(255, 77, 109, 0.3);
+    font-size: 24px;
+    animation: floatUp 8s linear infinite;
+    z-index: 0;
+  }
+  @keyframes floatUp {
+    0% { transform: translateY(100vh) scale(0.8); opacity: 0; }
+    30% { opacity: 1; }
+    100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+  }
+
+  .container {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 32px 24px;
+    max-width: 720px;
+    width: 100%;
+    box-shadow: var(--shadow);
+    position: relative;
+    z-index: 2;
+    animation: fadeIn 1.8s ease;
+  }
+  h1 {
+    text-align: center;
+    font-size: 2.2rem;
+    color: var(--pink);
+    margin-bottom: 10px;
+    animation: slideDown 1.5s ease;
+  }
+  h2 {
+    margin: 20px 0 10px;
+    font-size: 1.4rem;
+    color: var(--purple);
+  }
+  p { line-height: 1.6; font-size: 1.05rem; }
+  .letter { font-size: 1.1rem; margin-top: 12px; animation: fadeUp 2s ease; }
+  .reasons { display: grid; gap: 12px; margin-top: 10px; }
+  .reason {
+    background: #fff7fa;
+    border-left: 4px solid var(--pink);
+    padding: 12px 14px;
+    border-radius: 8px;
+    font-size: 1rem;
+    animation: fadeUp 2s ease;
+  }
+  .signature {
+    margin-top: 18px;
+    font-weight: bold;
+    color: var(--purple);
+    text-align: right;
+    font-size: 1.1rem;
+    animation: fadeUp 2.5s ease;
+  }
+  .inputBox { text-align: center; margin-bottom: 18px; }
+  .inputBox input {
+    padding: 10px 14px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 80%;
+    outline: none;
+    margin-top: 10px;
+  }
+  .btn {
+    margin-top: 14px;
+    background: var(--pink);
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform .2s, background .2s;
+    animation: pulse 1.5s infinite;
+  }
+  .btn:hover { background: #e63e5f; transform: scale(1.05); }
+  .hidden { display: none; }
+
+  /* WhatsApp Button */
+  .whatsapp-btn {
+    display: block;
+    text-align: center;
+    margin: 25px auto 10px;
+    text-decoration: none;
+    background: #25D366;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    transition: background .3s;
+  }
+  .whatsapp-btn:hover { background: #1ebc5a; }
+
+  /* Animations */
+  @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+  @keyframes fadeUp { from {opacity: 0; transform: translateY(20px);} to {opacity: 1; transform: translateY(0);} }
+  @keyframes slideDown { from {opacity: 0; transform: translateY(-20px);} to {opacity: 1; transform: translateY(0);} }
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+</style>
+</head>
+<body>
+  <!-- Floating hearts -->
+  <span class="heart" style="left:10%;">💗</span>
+  <span class="heart" style="left:30%; animation-delay:2s;">❤️</span>
+  <span class="heart" style="left:50%; animation-delay:4s;">💕</span>
+  <span class="heart" style="left:70%; animation-delay:1s;">💖</span>
+  <span class="heart" style="left:90%; animation-delay:3s;">💞</span>
+
+  <div class="container">
+    <div id="askName" class="inputBox">
+      <h2>Hey 💕</h2>
+      <p>Before I show you something special, tell me your name:</p>
+      <input type="text" id="herName" placeholder="Type your name here...">
+      <br>
+      <button class="btn" onclick="showSurprise()">See Surprise 💌</button>
+    </div>
+
+    <div id="surprise" class="hidden">
+      <h1>For <span id="displayHer">You</span> 💗</h1>
+      <div class="letter">
+        <p>Hi <span id="herSpan">love</span>,</p>
+        <p>
+          I wanted to do something different… something that lasts longer than a text.
+          You’ve been on my mind, and this is just my little way of telling you how much
+          you mean to me.
+        </p>
+        <p>
+          Whenever you smile, it feels like the world slows down for a moment—like nothing
+          else matters. I don’t just like you, I admire you… the way you carry yourself,
+          the kindness you show, the way you make ordinary days feel special.
+        </p>
+      </div>
+
+      <h2>Why You’re So Special</h2>
+      <div class="reasons" id="reasonsList"></div>
+
+      <div class="signature">— Style 💜</div>
+      <a class="whatsapp-btn" id="whatsappLink" target="_blank">💬 Reply on WhatsApp</a>
+    </div>
+
+    <!-- Magic Button (hidden at first) -->
+    <div class="inputBox">
+      <button id="magicBtn" class="btn hidden" onclick="triggerPrank()">Show the Magic ✨</button>
+    </div>
+
+    <!-- Background music -->
+    <audio id="bgMusic" loop>
+      <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+
+<script>
+  const reasons = [
+    "You make me laugh in the best way.",
+    "Your presence feels like peace and excitement at once.",
+    "Every conversation with you is something I look forward to.",
+    "You inspire me to be the best version of myself.",
+    "You have the most beautiful soul.",
+    "Being with you feels like home.",
+    "Your smile brightens even my darkest days."
+  ];
+
+  function shuffle(array) {
+    return array.sort(() => Math.random() - 0.5);
+  }
+
+  function showSurprise(){
+    const nameInput = document.getElementById("herName").value.trim();
+    if(!nameInput){
+      alert("Please enter your name 💕");
+      return;
+    }
+    document.getElementById("askName").classList.add("hidden");
+    document.getElementById("surprise").classList.remove("hidden");
+    document.getElementById("displayHer").textContent = nameInput;
+    document.getElementById("herSpan").textContent = nameInput;
+
+    // Shuffle reasons
+    const shuffled = shuffle(reasons).slice(0,4);
+    const list = document.getElementById("reasonsList");
+    list.innerHTML = "";
+    shuffled.forEach(r => {
+      const div = document.createElement("div");
+      div.className = "reason";
+      div.textContent = r;
+      list.appendChild(div);
+    });
+
+    // WhatsApp link
+    const msg = `Hi ${nameInput} 💕, I made this page just for you...`;
+    document.getElementById("whatsappLink").href =
+      "https://wa.me/2348012345678?text=" + encodeURIComponent(msg);
+
+    // Reveal Magic Button
+    document.getElementById("magicBtn").classList.remove("hidden");
+
+    // Play music with fade-in
+    const music = document.getElementById("bgMusic");
+    music.volume = 0;
+    music.play().catch(()=> console.log("Autoplay blocked"));
+    let vol = 0;
+    const fade = setInterval(()=>{
+      if(vol < 1){
+        vol += 0.02;
+        music.volume = vol;
+      } else {
+        clearInterval(fade);
+      }
+    }, 200);
+  }
+
+  function triggerPrank(){
+    alert("😂 It’s a prank! 💜");
+    document.getElementById("bgMusic").pause();
+    document.getElementById("surprise").classList.add("hidden");
+    document.getElementById("askName").classList.remove("hidden");
+    document.getElementById("magicBtn").classList.add("hidden"); // hide again
+  }
+</script>
+</body>
+</html>
