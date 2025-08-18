@@ -176,7 +176,9 @@
     </div>
 
     <!-- Magic Button (hidden at first) -->
-    
+    <div class="inputBox">
+      <button id="magicBtn" class="btn hidden" onclick="triggerPrank()">Show the Magic ✨</button>
+    </div>
 
     <!-- Background music -->
     <audio id="bgMusic" loop>
@@ -225,7 +227,7 @@
     // WhatsApp link
     const msg = `Hi ${nameInput} 💕, I made this page just for you...`;
     document.getElementById("whatsappLink").href =
-      "https://wa.me/2349018152318?text=" + encodeURIComponent(msg);
+      "https://wa.me/2348012345678?text=" + encodeURIComponent(msg);
 
     // Reveal Magic Button
     document.getElementById("magicBtn").classList.remove("hidden");
@@ -246,7 +248,7 @@
   }
 
   function triggerPrank(){
-    alert("😂 It’s a prank! 💜");
+    alert(" 💖 In you, my soul whispers love💖💜");
     document.getElementById("bgMusic").pause();
     document.getElementById("surprise").classList.add("hidden");
     document.getElementById("askName").classList.remove("hidden");
@@ -255,3 +257,5 @@
 </script>
 </body>
 </html>
+
+ 
