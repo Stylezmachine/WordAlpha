@@ -176,9 +176,7 @@
     </div>
 
     <!-- Magic Button (hidden at first) -->
-    <div class="inputBox">
-      <button id="magicBtn" class="btn hidden" onclick="triggerPrank()">Show the Magic ✨</button>
-    </div>
+    
 
     <!-- Background music -->
     <audio id="bgMusic" loop>
@@ -247,7 +245,7 @@
     }, 200);
   }
 
-  functi triggerPrank(){
+  function triggerPrank(){
     alert("😂 It’s a prank! 💜");
     document.getElementById("bgMusic").pause();
     document.getElementById("surprise").classList.add("hidden");
